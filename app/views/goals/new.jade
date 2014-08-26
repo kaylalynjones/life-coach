@@ -1,0 +1,22 @@
+extends ../shared/template
+block content
+  h2.text-center New Goal
+  .row
+    .col-xs-4
+    .col-xs-4
+      form(role='form', method='post', action='/goals')
+        .form-group
+          label(for='email') Name
+          input.form-control#name(type='text', name='name', autofocus=true)
+        .form-group
+          label(for='password') Due
+          input.form-control#due(type='date', name='due')
+        .form-group
+          label(for='email') Tags
+          input.form-control#tags(type='text', name='tags')
+        button.btn.btn-success(type='submit') Submit
+    .col-xs-4
+
+block scripts
+
+
