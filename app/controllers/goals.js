@@ -34,7 +34,7 @@ exports.addTask = function(req, res){
   Goal.findById(req.params.goalId, res.locals.user._id, function(goal){
     if(goal){
       goal.addTask(task, function(){
-        res.redirect('/goals/'+req.params.goalId+'/tasks');
+        res.redirect('/goals/'+req.params.goalId);
       });
     }else{
       res.redirect('/');
