@@ -1,0 +1,35 @@
+{
+    "_id" : {"$oid":"a00000000000000000000001"},
+    "name" : "Marathon",
+    "due" : {"$date":1607752800000},
+    "tags" : [ 
+        "exercise", 
+        "hard"
+    ],
+    "userId" :{"$oid":"000000000000000000000001"},
+    "tasks":[]
+},
+{
+    "_id" : {"$oid":"a00000000000000000000002"},
+    "name" : "Become a Chef",
+    "due" : {"$date":1607752800000},
+    "tags" : [ 
+        "career", 
+        "food",
+        "longterm"
+    ],
+    "userId" :{"$oid":"000000000000000000000001"},
+    "tasks":[]
+},
+{
+    "_id" : {"$oid":"a00000000000000000000003"},
+    "name" : "Lose Weight",
+    "due" : {"$date":1607752800000},
+    "tags" : [ 
+        "exercise", 
+        "longterm", 
+        "health"
+    ],
+    "userId" :{"$oid":"000000000000000000000002"},
+    "tasks":[]
+}

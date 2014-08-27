@@ -42,7 +42,7 @@ describe('Goal', function(){
   describe('.findAllByUserId', function(){
     it('should find users goals', function(done){
       var userId = Mongo.ObjectID('000000000000000000000001');
-      Goal.findAllByUserId(userId, function(err, goals){
+      Goal.findAllByUserId(userId, function(goals){
         expect(goals).to.have.length(2);
         done();
       });
@@ -53,16 +53,8 @@ describe('Goal', function(){
     it('should find a goal', function(done){
       var goalId = 'a00000000000000000000003',
           userId = '000000000000000000000002';
-      Goal.findById(goalId, userId, function(err, goal){
+      Goal.findById(goalId, userId, function(goal){
         expect(goal.name).to.equal('Lose Weight');
-        done();
-      });
-    });
-    it('should not find a goal', function(done){
-      var goalId = 'a00000000000000000000003',
-          userId = '000000000000000000000001';
-      Goal.findById(goalId, userId, function(err, goal){
-        expect(goal).to.be.null;
         done();
       });
     });
@@ -70,7 +62,7 @@ describe('Goal', function(){
 
   describe('#addTask', function(){
     it('should add a task to a goal', function(done){
-      var goalId = 'a00000000000000000000003',
+      var goalId = 'a00000000000000000000001',
           userId = '000000000000000000000001',
           task   = {
             name:'Get Shoes',
@@ -78,8 +70,8 @@ describe('Goal', function(){
             difficulty:'Easy',
             rank:'1'
           };
-      Goal.findById(goalId, userId, function(err, goal){
-        goal.addTask(task, function(err, goal){
+      Goal.findById(goalId, userId, function(goal){
+        goal.addTask(task, function(goal){
           expect(goal.tasks).to.have.length(1);
           done();
         });

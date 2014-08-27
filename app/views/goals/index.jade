@@ -1,0 +1,17 @@
+extends ../shared/template
+block content
+  h2.text-center Goals
+
+  table.table
+    thead
+      th Name
+      th Due
+      th Tags
+    tbody
+      each goal in goals
+        tr.hover
+          td: a(href='/goals/#{goal._id}')= goal.name
+          td= moment(goal.due).format('LL')
+          td= goal.tags
+
+block scripts

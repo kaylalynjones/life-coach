@@ -22,8 +22,10 @@ Goal.create = function(o, userId, cb){
 };
 
 Goal.findAllByUserId = function(userId, cb){
-  Goal.collection.find({userId:userId}).toArray(function(goals){
-    goals = _.create(Goal.prototype, goals);
+  Goal.collection.find({userId:userId}).toArray(function(err, goals){
+    goals = goals.map(function(goal){
+      return _.create(Goal.prototype, goal);
+    });
     cb(goals);
   });
 };
@@ -31,16 +33,25 @@ Goal.findAllByUserId = function(userId, cb){
 Goal.findById = function(goalId, userId, cb){
   goalId = Mongo.ObjectID(goalId);
   userId = Mongo.ObjectID(userId);
-  Goal.collection.findOne({_id:goalId, userId:userId}, function(goal){
+  Goal.collection.findOne({_id:goalId, userId:userId}, function(err, goal){
+    if (!goal) {
+      cb(null);
+    }
     goal = _.create(Goal.prototype, goal);
     cb(goal);
   });
 };
 
 Goal.prototype.addTask = function(body, cb){
+  var goal = this;
   var task = new Task(body);
-  this.tasks.push(task);
-  Goal.save(this, cb);
+  if (!goal.tasks) {
+    goal.tasks = [];
+  }
+  goal.tasks.push(task);
+  Goal.collection.save(goal, function(){
+    cb(goal);
+  });
 
 };
 

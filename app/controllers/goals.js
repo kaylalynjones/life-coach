@@ -14,13 +14,13 @@ exports.create = function(req, res){
 };
 
 exports.index = function(req, res){
-  Goal.findAllByUserId(res.locals.user._id, function(err, goals){
+  Goal.findAllByUserId(res.locals.user._id, function(goals){
     res.render('goals/index', {goals:goals, moment:moment});
   });
 };
 
 exports.show = function(req, res){
-  Goal.findById(req.params.goalId, res.locals.user._id, function(err, goal){
+  Goal.findById(req.params.goalId, res.locals.user._id, function(goal){
     if(goal){
       res.render('goals/show', {goal:goal, moment:moment});
     }else{
@@ -31,7 +31,7 @@ exports.show = function(req, res){
 
 exports.addTask = function(req, res){
   var task = req.body;
-  Goal.findById(req.params.goalId, res.locals.user._id, function(err, goal){
+  Goal.findById(req.params.goalId, res.locals.user._id, function(goal){
     if(goal){
       goal.addTask(task, function(){
         res.redirect('/goals/'+req.params.goalId+'/tasks');
